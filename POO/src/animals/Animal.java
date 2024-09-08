@@ -8,4 +8,8 @@ public class Animal {
     protected void sleep() {
         System.out.println("El animal esta durmiendo");
     }
+
+    protected void sound() {
+        System.out.println("El Sonido del Animal");
+    }
 }

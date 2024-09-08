@@ -1,6 +1,8 @@
 package person;
 
 public class Person {
+    private static int countPersons = 0;
+    private int id;
     private String name;
     private String lastName;
     private String email;
@@ -11,6 +13,10 @@ public class Person {
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+
+        // Incrementar el atributo Statico
+//        Person.countPersons++;
+        this.id = ++Person.countPersons;
     }
 
     public String getName() {
@@ -46,6 +52,7 @@ public class Person {
     }
 
     public void viewPerson() {
+        System.out.println("Id: " + id);
         System.out.println("Nombre: " + name);
         System.out.println("Apellido: " + lastName);
     }
@@ -56,6 +63,16 @@ public class Person {
 
     public void sendEmail() {
         System.out.println("Correo electronico: " + email);
+    }
+
+    public static int viewCountPersons() {
+        return Person.countPersons;
+    }
+
+    //Sobreescribir toString
+    @Override
+    public String toString() {
+        return "Id: " + this.id + ", Nombre: " + this.name + ", Apellido: " + this.lastName;
     }
 
 }

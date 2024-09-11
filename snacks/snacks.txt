@@ -1,0 +1,5 @@
+,Papas Fritas,2500.0
+2,Coca Cola,3500.0
+3,Galletas,1500.0
+4,Cerveza,4500.0
+5,Chupeta,500.0

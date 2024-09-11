@@ -1,4 +1,4 @@
-package snack_project;
+package snack_project.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -41,6 +41,10 @@ public class Snack implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String writeSnack() {
+        return idSnack + "," +  name + "," + price;
     }
 
     @Override

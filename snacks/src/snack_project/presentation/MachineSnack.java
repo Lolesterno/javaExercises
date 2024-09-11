@@ -1,4 +1,9 @@
-package snack_project;
+package snack_project.presentation;
+
+import snack_project.domain.Snack;
+import snack_project.service.IsSnacks;
+import snack_project.service.ServiceSnacksFile;
+import snack_project.service.ServiceSnacksList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +17,19 @@ public class MachineSnack {
     public static void machineSnacks() {
         var exit = false;
         Scanner console = new Scanner(System.in);
+        // Object Servicio Snacks
+        //IsSnacks serviceSnacks = new ServiceSnacksList();
+        IsSnacks serviceSnacks = new ServiceSnacksFile();
 
         // Menu
         List<Snack> products = new ArrayList<>();
         System.out.println("--- Bienvenido a Snacks Inc. ---");
-        Snacks.viewSnacks();
+        serviceSnacks.viewSnacks();
 
         while (!exit) {
             try {
                 var option = sendMenu(console);
-                exit = execOptions(option, console, products);
+                exit = execOptions(option, console, products, serviceSnacks);
 
             }catch (Exception e) {
                 System.out.println("Error: " + e);
@@ -43,15 +51,15 @@ public class MachineSnack {
         return Integer.parseInt(console.nextLine());
     }
 
-    private static boolean execOptions(int option, Scanner console, List<Snack> products) {
+    private static boolean execOptions(int option, Scanner console, List<Snack> products, IsSnacks serviceSnacks) {
         boolean exit = false;
 
         switch (option){
-            case 1 -> buySnack(console, products);
+            case 1 -> buySnack(console, products, serviceSnacks);
 
             case 2 -> viewTicket(products);
 
-            case 3 -> addSnack(console);
+            case 3 -> addSnack(console, serviceSnacks);
 
             case 4 -> exit = true;
 
@@ -62,12 +70,12 @@ public class MachineSnack {
         return exit;
     }
 
-    private static void buySnack(Scanner console, List<Snack> products) {
+    private static void buySnack(Scanner console, List<Snack> products, IsSnacks serviceSnacks) {
         System.out.print("Elige un snack (id): ");
         int idSnack = Integer.parseInt(console.nextLine());
 
         boolean snackFound = false;
-        for (var snack: Snacks.getSnacks()) {
+        for (var snack: serviceSnacks.getSnacks()) {
             if(idSnack == snack.getIdSnack()) {
                 // Agregamos el Snack
                 products.add(snack);
@@ -94,16 +102,16 @@ public class MachineSnack {
         System.out.println(ticket);
     }
 
-    private static void addSnack(Scanner console) {
+    private static void addSnack(Scanner console, IsSnacks serviceSnacks) {
         System.out.print("Nombre del nuevo producto: ");
         String name = console.nextLine();
         System.out.print("Precio: ");
         double price = Double.parseDouble(console.nextLine());
 
-        Snacks.addSnack(new Snack(name, price));
+        serviceSnacks.addSnack(new Snack(name, price));
 
         System.out.println("Snack agregado correctamente!");
-        Snacks.viewSnacks();
+        serviceSnacks.viewSnacks();
     }
 
 }

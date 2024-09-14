@@ -21,7 +21,7 @@ public class ClientDao implements IClientDao {
         ResultSet rs;
         Connection con = getConnection();
 
-        String sql = "SELECT * FROM clients ORDER BY id";
+        String sql = "SELECT * FROM client ORDER BY id";
 
         try {
             ps = con.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class ClientDao implements IClientDao {
         PreparedStatement ps;
         ResultSet rs;
         Connection con = getConnection();
-        String sql = "SELECT  * FROM clients WHERE id = ?";
+        String sql = "SELECT  * FROM client WHERE id = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -84,7 +84,7 @@ public class ClientDao implements IClientDao {
     public boolean createClient(Client client) {
         PreparedStatement ps;
         Connection con = getConnection();
-        String sql = "INSERT INTO clients (name, lastname, membresia)"
+        String sql = "INSERT INTO client (name, lastname, membresia)"
                     + " VALUES(?, ?, ?)";
 
         try {
@@ -113,7 +113,7 @@ public class ClientDao implements IClientDao {
     public boolean updateClient(Client client) {
         PreparedStatement ps;
         Connection con = getConnection();
-        String sql = "UPDATE clients SET name=?, lastname=?, membresia=? " +
+        String sql = "UPDATE client SET name=?, lastname=?, membresia=? " +
                 "WHERE id = ?";
 
         try {
@@ -142,7 +142,7 @@ public class ClientDao implements IClientDao {
     public boolean deleteClient(Client client) {
         PreparedStatement ps;
         Connection con = getConnection();
-        String sql = "DELETE FROM clients WHERE id = ?";
+        String sql = "DELETE FROM client WHERE id = ?";
 
         try {
             ps = con.prepareStatement(sql);
